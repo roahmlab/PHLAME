@@ -11,8 +11,8 @@
 1. `conda activate phlame`
 2. Add the modules to your `PYTHONPATH` using the following. Note in place of `<your_phlame_directory>` below make sure to use the full aboslute path to your phlame directory during the export:
 ```
-export PYTHONPATH="<your_phlame_directory>src/phlame":"${PYTHONPATH}"
-export PYTHONPATH="<your_phlame_directory>src/":"${PYTHONPATH}"
+export PYTHONPATH="<your_phlame_directory>/src/phlame":"${PYTHONPATH}"
+export PYTHONPATH="<your_phlame_directory>/src/":"${PYTHONPATH}"
 ```
 3. Run tests to verify correct installation
     - `python3 installation_tests/scikits_odes_test.py`
