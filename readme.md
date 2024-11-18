@@ -17,3 +17,16 @@ export PYTHONPATH="<your_phlame_directory>/src/":"${PYTHONPATH}"
 3. Run tests to verify correct installation
     - `python3 installation_tests/scikits_odes_test.py`
     - `python3 tests/run_unit_tests.py` 
+
+
+## Bibtex
+To cite **PHLAME** in your academic research, please use the following bibtex entry:
+```
+@article{enninfulphlame2024,
+  title={Bring the Heat: Rapid Trajectory Optimization With Pseudospectral Techniques and the Affine Geometric Heat Flow Equation},
+  author={Challen Enninful Adu and Cesar E. Ramos Chuquiure and Bohao Zhang and Ram Vasudevan},
+  journal={ArXiv},
+  year={2024},
+  volume={abs/temp},
+  url={http://www.roahmlab.com/}}
+```
