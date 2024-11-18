@@ -1,0 +1,8 @@
+BasedOnStyle: Google  # Or any other style you prefer
+---
+Language: Cpp
+BreakBeforeBraces: Allman  # Optional: Controls brace formatting
+BinPackParameters: false # false -- forces all function parameters to appear on a new line when defining a function
+BinPackArguments: true  # false -- forces all function parameters to appear on a new line when calling a function
+PenaltyBreakBeforeFirstCallParameter: 0
+ColumnLimit: 80

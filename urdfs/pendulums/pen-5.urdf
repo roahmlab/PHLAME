@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="five_link_pendulum">
+  <link name="link_0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>  
+  </link>
+
+  <link name="link_1">
+    <inertial>
+      <origin xyz="-0.5 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+  <link name="link_2">
+    <inertial>
+      <origin xyz="-0.5 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+  <link name="link_3">
+    <inertial>
+      <origin xyz="-0.5 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+  <link name="link_4">
+    <inertial>
+      <origin xyz="-0.5 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+  <link name="link_5">
+    <inertial>
+      <origin xyz="-0.5 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+  <link name="link_end">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>    
+  </link>
+
+  <joint name="joint_1" type="revolute">
+    <parent link="link_0"/>
+    <child link="link_1"/>
+    <origin xyz="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-99999" upper="99999" effort="99999" velocity="99999"/>
+  </joint>
+
+  <joint name="joint_2" type="revolute">
+    <parent link="link_1"/>
+    <child link="link_2"/>
+    <origin xyz="-1 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-99999" upper="99999" effort="99999" velocity="99999"/>
+  </joint>
+
+  <joint name="joint_3" type="revolute">
+    <parent link="link_2"/>
+    <child link="link_3"/>
+    <origin xyz="-1 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-99999" upper="99999" effort="99999" velocity="99999"/>
+  </joint>
+
+  <joint name="joint_4" type="revolute">
+    <parent link="link_3"/>
+    <child link="link_4"/>
+    <origin xyz="-1 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-99999" upper="99999" effort="99999" velocity="99999"/>
+  </joint>
+
+  <joint name="joint_5" type="revolute">
+    <parent link="link_4"/>
+    <child link="link_5"/>
+    <origin xyz="-1 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-99999" upper="99999" effort="99999" velocity="99999"/>
+  </joint>
+
+  <joint name="joint_end" type="fixed">
+    <parent link="link_5"/>
+    <child link="link_end"/>
+    <origin xyz="-1 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-99999" upper="99999" effort="99999" velocity="99999"/>
+  </joint>
+
+
+</robot>

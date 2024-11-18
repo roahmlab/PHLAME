@@ -1,0 +1,57 @@
+# Ignore Matlab mex binaries
+**/*.mex*
+
+# Ignore .prj files
+**/*.prj
+
+# Ignore python virtual env
+**/venve/**
+
+# Ignore .mat files
+**/*.mat*
+
+# Ignore .asv files
+**/*.asv*
+
+# Ignore codegen files
+**/codegen/** 
+
+# Ignore pycache
+**/__pycache__/**
+
+# Ignore images
+*.png
+*.jpeg
+*.jpg
+
+# Ignore videos
+*.avi
+*.mp4
+*.wmv
+
+.vscode/
+*.gif
+*.so
+*.pyc
+
+# Ignore pickles
+**/*.pkl*
+
+# Ignore csv
+**/*.csv*
+
+# Ignore .so
+**/*.so*
+
+# Compressed stuff
+**/*.tar.gz*
+**/*.zip*
+
+# Txt files
+*.txt
+
+# Ignore
+*.pdf
+
+# Ignore mac stuff
+**/.DS_Store

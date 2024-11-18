@@ -1,0 +1,22 @@
+name: phlame
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.7 #needed for pinnochio pybindings
+  - matplotlib # beautiful plots. See tutorial tools_matplotlib.ipynb
+  - tqdm # progress bars
+  - numpy=1.26.4 # Powerful n-dimensional arrays and numerical computing tools
+  - pandas=2.2.2 # data analysis and manipulation tool
+  - pebble=5.0.7 # provides a neat API to manage threads and processes within an application
+  - pip # Python's package-management system
+  - scipy=1.13.1 # scientific/technical computing library
+  - conda-forge::pinocchio=2.7.1 #install pinnochio
+  - cmake # to be able to compile C++ files
+  - pybind11=2.12.0 #to be able to use pybinds
+  - ipdb=0.13.13 #for python debugging
+  - conda-forge::sundials=6.7.0 # for solving ODEs
+  - conda-forge::scikits.odes=2.7.0 # for solving ODEs using python API
+  - pip:
+    - nose # To run the tests to see if scikits odes is working correctly
+    - sympy #to load in and work with symbolic expressions

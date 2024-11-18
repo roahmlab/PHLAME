@@ -1,0 +1,38 @@
+package:
+  name: "phlame"
+  version: "0.1"
+
+source:
+  path: ../
+
+requirements:
+  build:
+    - python=3.11.7
+    - make
+    - pybind11
+    - conda-forge::pinocchio=2.7.1
+    - conda-forge::sundials=6.7.0
+    - conda-forge::scikits.odes=2.7.0
+
+  run:
+    - python=3.11.7
+    - matplotlib
+    - tqdm
+    - numpy
+    - pandas
+    - pebble
+    - scipy
+    - ipdb
+    - conda-forge::pinocchio=2.7.1
+    - conda-forge::sundials=6.7.0
+    - conda-forge::scikits.odes=2.7.0
+    - sympy
+
+test:
+  imports:
+    - phlame
+
+about:
+  home: "https://github.com/roahmlab/phlame"
+  license: "GNU"
+  summary: "Pseudo Spectral Affine Geometric Heat Flow."
