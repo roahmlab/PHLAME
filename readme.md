@@ -24,9 +24,10 @@ To cite **PHLAME** in your academic research, please use the following bibtex en
 ```
 @article{enninfulphlame2024,
   title={Bring the Heat: Rapid Trajectory Optimization With Pseudospectral Techniques and the Affine Geometric Heat Flow Equation},
-  author={Challen Enninful Adu and Cesar E. Ramos Chuquiure and Bohao Zhang and Ram Vasudevan},
-  journal={ArXiv},
+  author={Challen Enninful Adu and César E. Ramos Chuquiure and Bohao Zhang and Ram Vasudevan},
   year={2024},
-  volume={abs/temp},
-  url={http://www.roahmlab.com/}}
+  eprint={2411.12962},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2411.12962}}
 ```
