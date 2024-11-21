@@ -47,7 +47,7 @@ links:
   - icon: arxiv
     icon-library: simpleicons
     text: ArXiv
-    url: http://www.roahmlab.com/
+    url: https://arxiv.org/abs/2411.12962
   - icon: github
     icon-library: simpleicons
     text: Code
@@ -101,7 +101,7 @@ links:
 <div markdown="1" class="content-block justify grey">
 
 # [Abstract](#abstract)
-Generating optimal trajectories for high-dimensional robotic systems in a time-efficient manner while adhering to constraints is a challenging task. To address this challenge, this paper introduces PHLAME, which applies pseudospectral collocation and spatial vector algebra to efficiently solve the Affine Geometric Heat Flow (AGHF) Partial Differential Equation (PDE) for trajectory optimization. Unlike traditional PDE approaches like the Hamilton-Jacobi-Bellman (HJB) PDE, which solve for a function over the entire state space, computing a solution to the AGHF PDE scales more efficiently because its solution is defined over a two-dimensional domain, thereby avoiding the intractability of state-space scaling. To solve the AGHF one usually applies the Method of Lines (MOL), which works by discretizing one variable of the AGHF PDE, effectively converting the PDE into a system of ordinary differential equations (ODEs) that can be solved using standard time-integration methods. Though powerful, this method requires a fine discretization to generate accurate solutions and still requires evaluating the AGHF PDE which can be commputationally expensive for high dimensional systems. PHLAME overcomes this deficiency by using a pseudospectral method, which reduces the number of function evaluations required to yield a high accuracy solution thereby allowing it to scale efficiently to high-dimensional robotic systems. To further increase computational speed, this paper presents analytical expressions for the AGHF and its Jacobian, both of which can be computed efficiently using rigid body dynamics algorithms. The proposed method PHLAME is tested across various dynamical systems, with and without obstacles and compared to a number of state-of-the-art techniques. PHLAME is able to generate trajectories for a 44-dimensional state-space system in ~3 seconds, much faster than current state-of-the-art techniques. Code is available on GitHub at [roahmlab/PHLAME](https://github.com/roahmlab/PHLAME).
+Generating optimal trajectories for high-dimensional robotic systems in a time-efficient manner while adhering to constraints is a challenging task. To address this challenge, this paper introduces PHLAME, which applies pseudospectral collocation and spatial vector algebra to efficiently solve the Affine Geometric Heat Flow (AGHF) Partial Differential Equation (PDE) for trajectory optimization. Unlike traditional PDE approaches like the Hamilton-Jacobi-Bellman (HJB) PDE, which solve for a function over the entire state space, computing a solution to the AGHF PDE scales more efficiently because its solution is defined over a two-dimensional domain, thereby avoiding the intractability of state-space scaling. To solve the AGHF one usually applies the Method of Lines (MOL), which works by discretizing one variable of the AGHF PDE, effectively converting the PDE into a system of ordinary differential equations (ODEs) that can be solved using standard time-integration methods. Though powerful, this method requires a fine discretization to generate accurate solutions and still requires evaluating the AGHF PDE which can be commputationally expensive for high dimensional systems. PHLAME overcomes this deficiency by using a pseudospectral method, which reduces the number of function evaluations required to yield a high accuracy solution thereby allowing it to scale efficiently to high-dimensional robotic systems. To further increase computational speed, this paper presents analytical expressions for the AGHF and its Jacobian, both of which can be computed efficiently using rigid body dynamics algorithms. The proposed method PHLAME is tested across various dynamical systems, with and without obstacles and compared to a number of state-of-the-art techniques. PHLAME is able to generate trajectories for a 44-dimensional state-space system in ~5 seconds, much faster than current state-of-the-art techniques. Code is available on GitHub at [roahmlab/PHLAME](https://github.com/roahmlab/PHLAME).
 
 </div> <!-- END ABSTRACT -->
 
@@ -253,11 +253,12 @@ This project was developed in [Robotics and Optimization for Analysis of Human M
 ```bibtex
 @article{enninfulphlame2024,
   title={Bring the Heat: Rapid Trajectory Optimization With Pseudospectral Techniques and the Affine Geometric Heat Flow Equation},
-  author={Challen Enninful Adu and Cesar E. Ramos Chuquiure and Bohao Zhang and Ram Vasudevan},
-  journal={ArXiv},
+  author={Challen Enninful Adu and César E. Ramos Chuquiure and Bohao Zhang and Ram Vasudevan},
   year={2024},
-  volume={abs/temp},
-  url={http://www.roahmlab.com/}}
+  eprint={2411.12962},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2411.12962}}
 ```
 </div>
 
