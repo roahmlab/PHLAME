@@ -52,6 +52,10 @@ links:
     icon-library: simpleicons
     text: Code
     url: https://github.com/roahmlab/PHLAME
+  - icon: bi-file-earmark-text
+    icon-library: bootstrap-icons
+    text: Supplementary Appendices
+    url: PHLAME_Appendices.pdf
 
 # End Front Matter
 ---
