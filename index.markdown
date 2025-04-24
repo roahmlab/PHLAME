@@ -44,6 +44,10 @@ author-footnotes:
   All authors affiliated with the department of Robotics at the University of Michigan, Ann Arbor.
 
 links:
+  - icon: bi-file-earmark-text
+    icon-library: bootstrap-icons
+    text: Paper
+    url: https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10919247
   - icon: arxiv
     icon-library: simpleicons
     text: ArXiv
@@ -255,14 +259,17 @@ All of these trajectories were generated in &lt; 5 seconds
 This project was developed in [Robotics and Optimization for Analysis of Human Motion (ROAHM) Lab](http://www.roahmlab.com/) at the University of Michigan - Ann Arbor.
 
 ```bibtex
-@article{enninfulphlame2024,
-  title={Bring the Heat: Rapid Trajectory Optimization With Pseudospectral Techniques and the Affine Geometric Heat Flow Equation},
-  author={Challen Enninful Adu and César E. Ramos Chuquiure and Bohao Zhang and Ram Vasudevan},
-  year={2024},
-  eprint={2411.12962},
-  archivePrefix={arXiv},
-  primaryClass={cs.RO},
-  url={https://arxiv.org/abs/2411.12962}}
+@ARTICLE{enninfulphlame2024,
+  author={Adu, Challen Enninful and Chuquiure, César E. Ramos and Zhang, Bohao and Vasudevan, Ram},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={Bring the Heat: Rapid Trajectory Optimization With Pseudospectral Techniques and the Affine Geometric Heat Flow Equation}, 
+  year={2025},
+  volume={10},
+  number={4},
+  pages={4148-4155},
+  keywords={Heuristic algorithms;Heating systems;Robots;Trajectory optimization;Vectors;Partial differential equations;Dynamic programming;Planning;Optimal control;Faces;Optimization and optimal control;motion and path planning;integrated planning and control},
+  doi={10.1109/LRA.2025.3547299}}
+
 ```
 </div>
 
