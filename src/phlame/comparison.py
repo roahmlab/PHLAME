@@ -1,5 +1,5 @@
 """
-Functions to compare the results of crocoddyl and AGHF and Aligator.
+Functions to compare the results of crocoddyl and AGHF
 """
 
 from scipy.io import loadmat
@@ -28,14 +28,14 @@ def get_best_pset(gr_df, cols_sort, ascending, top_k, pset_keys):
     Selects the top k rows from a dataframe after sorting it based on specified columns.
 
     Args:
-        - gr_df (pd.DataFrame): The dataframe to be sorted and filtered.
-        - cols_sort (list of str): The columns to sort the dataframe by.
-        - ascending (bool or list of bool): Sort order for each column. True for ascending, False for descending.
-        - top_k (int): The number of top rows to select after sorting.
-        - pset_keys (list of str): The keys to include in the resulting dictionaries.
+        gr_df (pd.DataFrame): The dataframe to be sorted and filtered.
+        cols_sort (list of str): The columns to sort the dataframe by.
+        ascending (bool or list of bool): Sort order for each column. True for ascending, False for descending.
+        top_k (int): The number of top rows to select after sorting.
+        pset_keys (list of str): The keys to include in the resulting dictionaries.
 
     Returns:
-        - list of dict: A list of dictionaries containing the top k rows with specified keys.
+        list of dict: A list of dictionaries containing the top k rows with specified keys.
     """
     res = []
     gr_sorted = gr_df.sort_values(by=cols_sort, ascending=ascending)
@@ -48,13 +48,13 @@ def make_boxplot(base_df, best_pset_list, cols_plot, pset_keys, sup_title_str, u
     Creates boxplots for specified columns of a filtered dataframe, with custom y-axis limits.
 
     Args:
-        - base_df (pd.DataFrame): The base dataframe to filter and plot.
-        - best_pset_list (list of dict): The list of best parameter sets to filter the dataframe.
-        - cols_plot (list of str): The columns to create boxplots for.
-        - pset_keys (str): The keys to group the boxplots by.
-        - sup_title_str (str): The overall title for the figure.
-        - u_max (float): The maximum value for the first y-axis.
-        - t_max (float): The maximum value for the second y-axis.
+        base_df (pd.DataFrame): The base dataframe to filter and plot.
+        best_pset_list (list of dict): The list of best parameter sets to filter the dataframe.
+        cols_plot (list of str): The columns to create boxplots for.
+        pset_keys (str): The keys to group the boxplots by.
+        sup_title_str (str): The overall title for the figure.
+        u_max (float): The maximum value for the first y-axis.
+        t_max (float): The maximum value for the second y-axis.
 
     Returns:
         None
@@ -77,11 +77,11 @@ def filter_df(in_df, list_dict):
     Filters in_df based on the conditions in list_dict. Any of the conditions has to be satisfied.
 
     Parameters:
-        - in_df (pd.DataFrame): The input DataFrame to be filtered.
-        - list_dict (list of dict): A list of dictionaries, where each dictionary contains conditions.
+    - in_df (pd.DataFrame): The input DataFrame to be filtered.
+    - list_dict (list of dict): A list of dictionaries, where each dictionary contains conditions.
 
     Returns:
-        - pd.DataFrame: The filtered DataFrame.
+    - pd.DataFrame: The filtered DataFrame.
     """
     # Start with a False condition to combine others with OR logic
     combined_condition = pd.Series([False] * len(in_df))
@@ -105,8 +105,22 @@ def filter_df(in_df, list_dict):
 # For the new code for scatter plots
 
 def pre_process_dicts(fps):
+    """
+    This assumes that the dfs have the exact same column
+    """
     df_list = []
     for ic_name, fp_csv in fps.items():
+        # ipdb.set_trace()
+
+        # change the filepath up to storage to point to the backup location
+        if not os.path.isfile(fp_csv):
+            # use the backup location
+            old_str = "/home/cesarch/repos/AGHF/new_pseudo_spectral/psaghf/storage/"
+            new_str = "/mnt/ws-frb/users/cesarch/storage/"
+            # ipdb.set_trace()
+            fp_csv = fp_csv.replace(old_str, new_str)
+            
+
         curr_df = pd.read_csv(fp_csv)
         curr_df['ic_name'] = ic_name
         df_list.append( curr_df.copy() )
@@ -160,12 +174,12 @@ def filter_df_th_top_sort(df, th_val, top_k, sort_col, N, max_t_solve, max_u2, k
             curr_df = curr_df[curr_df['k_p'].isin(kp_list)]
             curr_df = curr_df[curr_df['k_v'].isin(kv_list)]
 
-            
+            # ipdb.set_trace()
 
 
         # fix u2 for aligator and croco
         if "u_sq_real" in curr_df:
-            
+            # ipdb.set_trace()
             curr_df["u_sq_real"] = curr_df["u_sq_real"].map(lambda x: str(x)[2:-2] )
             curr_df = curr_df[curr_df['u_sq_real'] != '']
             curr_df['u_sq_real'] = curr_df['u_sq_real'].astype(float)
@@ -189,7 +203,7 @@ def filter_df_th_top_sort(df, th_val, top_k, sort_col, N, max_t_solve, max_u2, k
         if top_k is not None:
             curr_df = curr_df.head(top_k)
 
-        
+        # ipdb.set_trace()
 
         return curr_df
     else:
@@ -224,24 +238,24 @@ def get_best_param(df: Optional['pd.DataFrame'], check_col_obs: str,
     else:
         return df[cols_no_obs].iloc[0].to_dict()
 
-def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, exp_title, fp_folder_store,
+def run_all(fps_aghf, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, exp_title, fp_folder_store,
             max_t_solve, max_u2, kp_list, kv_list, filter_collision=False, ylog=False, xlog=False, scenario_name=None,
             do_plot=True):
-    """
+    """"
     Generates a scatter plot and 3 tables with the best results for the
     three methods. 
 
-    Args:
-        - fphlame (List[str]): points to a csv
-        - fps_aligator (List[str])
-        - fps_croco (List[str])
-        - th_val (float): inf norm threshold of the BC
-        - top_k (int): number of successes to consider
-        - sort_col (str): value that will be used to rank results from best to worst
+    Inputs:
+    ------
+    fps_aghf: List[str]: points to a csv
+    fps_aligator: List[str]
+    fps_croco: List[str]
+    th_val: float : inf norm threshold of the BC
+    top_k: number of successes to consider
+    sort_col: value that will be used to rank results from best to worst
     """
 
-    df_aghf = pre_process_fps(fphlame)
-    
+    df_aghf = pre_process_fps(fps_aghf)
     # remove trivial results
     df_aghf = df_aghf[df_aghf['best_s'] != 0]
 
@@ -252,9 +266,6 @@ def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, e
         df_aghf['obs_check'] = df_aghf['obs_check'].astype(str)
         df_croco['obs_check'] = df_croco['obs_check'].astype(str)
         df_alig['obs_check'] = df_alig['obs_check'].astype(str)
-
-    if scenario_name == "scenario_10":
-        
 
     best_parameters = {"aghf": [], "croco": [], "alig": []}
 
@@ -280,13 +291,13 @@ def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, e
             ['k_p', 'k_v', 'scenario_name', 'weight_x', 'weight_u', 'weight_xf', 'dt_alig', 'ic_name', 'tol', 'mu_init', 'max_iters'],
         )
         
-        
+        # ipdb.set_trace()
 
         best_parameters['aghf'].append( (N, best_param_aghf ))
         best_parameters['croco'].append( (N, best_param_croco ))
         best_parameters['alig'].append( (N, best_param_alig ))
 
-        
+        # ipdb.set_trace()
 
         if do_plot:
         
@@ -301,13 +312,24 @@ def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, e
                 "croco": "#FFA719",
                 "alig": "#D3168A",
             }
-
+            # fig, axs = plt.subplots( nrows=1, ncols=3, sharex=True, sharey=True)
+            # fig, axs = plt.subplots( nrows=1, ncols=3)
             fig, ax = plt.subplots( nrows=1, ncols=1)
 
             fig.set_size_inches(9.5, 5.5)
             fig.supxlabel('u^2 fwd sim')
             fig.supylabel('t_solve[s]')
             fig.suptitle(f"{exp_title}, N={N}, th_val={th_val}, sort_col={sort_col}")
+
+            # for ii, (method_name, vals) in enumerate(data.items()):
+            #     curr_df = vals[0]
+            #     u2_name = vals[1]
+            #     if curr_df is not None:
+            #         axs[ii].scatter( curr_df[u2_name], curr_df["t_solve"], c=curr_df['inf_norm'], cmap='copper', label=method_name )
+                
+            #     axs[ii].legend()
+            #     axs[ii].set_xticks(axs[ii].get_xticks(), axs[ii].get_xticklabels(), rotation=45, ha='right')
+            #     axs[ii].grid()
             
             max_u = 0
             min_u = np.inf
@@ -318,14 +340,15 @@ def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, e
             for ii, (method_name, vals) in enumerate(data.items()):
                 curr_df = vals[0]
                 u2_name = vals[1]
-                    
+                # if method_name == "alig":
+                    # ipdb.set_trace()
                 if curr_df is not None:
                     print("N: ", N)
                     print("#"*100)
                     ax.scatter( curr_df[u2_name], curr_df["t_solve"], c=method_to_color[method_name], label=method_name )
 
                         
-                    
+                    # ipdb.set_trace()
                     if curr_df.shape[0] > 0:
                         max_u = max( curr_df[u2_name].max(), max_u)
                         min_u = min( curr_df[u2_name].min(), min_u)
@@ -339,7 +362,7 @@ def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, e
                             print(curr_df[["best_s", "k", "p", "t_solve", "best_u_sq", "N", "ic_name", "k_cons", "c_cons", "scenario_name", "k_p", "k_v"]])
                         else:
                             print(curr_df[["best_s", "k", "p", "t_solve", "best_u_sq", "N", "ic_name", "scenario_name", "k_p", "k_v"]])
-                            
+                            # ipdb.set_trace()
                     elif method_name == "croco":
                         print(curr_df[["dt_croco", "t_solve", "u_sq_real", "N", "ic_name", "scenario_name", "k_p", "k_v"]])
                     elif method_name == "alig":
@@ -348,11 +371,13 @@ def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, e
 
             ax.legend()
             ax.grid()
-            
+            # ax.set_xticks(ax.get_xticks(), ax.get_xticklabels(), rotation=45, ha='right')
             if (N == 5) or xlog:
                 ax.set_xscale('log')
-                
+                # ticks = np.logspace(np.floor(np.log10(min_u)), np.ceil(np.log10(max_u)), num=15)
+
             # Force specific ticks on the x-axis (choose appropriate values for your data)
+            # 
             ticks = np.linspace(np.floor(min_u), np.ceil(max_u), num=15)
             ax.set_xticks(ticks)
             ax.set_xticklabels([f'{tick:.2f}' for tick in ticks], rotation=45, ha='right')
@@ -364,12 +389,12 @@ def run_all(fphlame, fps_aligator, fps_croco, th_val, top_k, sort_col, N_list, e
                 y_ticks = np.logspace(np.floor(np.log10(min_t)), np.ceil(np.log10(max_t)), num=15)
                 ax.set_yticks(y_ticks)
                 ax.set_yticklabels([f'{tick:.2f}' for tick in y_ticks])
-                
+                # ipdb.set_trace()
 
             fn = f"{exp_title}-N={N}-th_val={th_val}.pdf"
             fp = os.path.join(fp_folder_store, fn)
             plt.tight_layout()
-            plt.savefig(fp, format="pdf")
+            # plt.savefig(fp, format="pdf")
 
     return best_parameters
 
@@ -403,6 +428,8 @@ def get_x0_xf_q_traj(fp_folder_scenarios, scenario_name, N):
     x0 = np.concatenate( ( q_start, qd_start ) ).astype(dtype=np.double, order='F')
     xf = np.concatenate( ( q_end, qd_end ) ).astype(dtype=np.double, order='F')
 
+    # ipdb.set_trace()
+
     return x0, xf, q_traj
 
 
@@ -412,6 +439,8 @@ def custom_run_aghf(param_dict, abs_tol, rel_tol, dt_fwd, th_fwd, t_total,
                     force_s_max):
 
     # Inside fp_folder_base there will be a folder per experiment.
+    
+
     fp_folder_store, fp_folder_output, fn_table, fn_all, fp_table_csv,\
         fp_table_output, fp_folder_input, fp_folder_pickles, fp_folder_fwd_store = \
         generate_fp_folders_and_fns(fn_folder, fp_folder_base)
@@ -448,10 +477,10 @@ def custom_run_aghf(param_dict, abs_tol, rel_tol, dt_fwd, th_fwd, t_total,
 
     print("number of cases: ", len(parameter_sets))
     
-     
+    # ipdb.set_trace() 
     experiment = Experiment(parameter_sets, timeout, print_debug=False, folder_store=fp_folder_store)
     
-    
+    # ipdb.set_trace()
     experiment.run_seq_and_store()
 
     # experiment.run_parallel(max_workers=1)
@@ -513,6 +542,8 @@ def run_sequential_with_repeats(fp_folder_params, list_fn_params, N_to_j_type,
 def get_param_across_scenarios(df, param_names, col_sort, u2_col):
     if df is None:
         return None
+
+    # u2_col_name = get_u2_col(df)
     
     res = df.groupby(param_names).agg({
         "t_solve": 'mean',
@@ -522,7 +553,7 @@ def get_param_across_scenarios(df, param_names, col_sort, u2_col):
     res = res.reset_index(drop=False)
     n_max = res['th_1'].max()
     res = res[ res['th_1'] == n_max ]
-    
+    # ipdb.set_trace()
     
     if col_sort == "t_solve":
         res = res.sort_values(by=col_sort)
@@ -533,13 +564,13 @@ def get_param_across_scenarios(df, param_names, col_sort, u2_col):
     
     return res
 
-def get_avg_best_param(fphlame, fps_aligator, fps_croco, th_val, sort_col, N,
+def get_avg_best_param(fps_aghf, fps_aligator, fps_croco, th_val, sort_col, N,
                        max_t_solve, max_u2, kp_list, kv_list, scenario_names, 
                        filter_collision=False):
     """ 
     
     """
-    df_aghf = pre_process_fps(fphlame)
+    df_aghf = pre_process_fps(fps_aghf)
     # remove trivial results
     df_aghf = df_aghf[df_aghf['best_s'] != 0]
 
@@ -562,7 +593,9 @@ def get_avg_best_param(fphlame, fps_aligator, fps_croco, th_val, sort_col, N,
     top_alig = filter_df_th_top_sort(df_alig, th_val, None, sort_col, N, max_t_solve, max_u2,
                                      kp_list, kv_list, filter_collision)
     
+    ipdb.set_trace()
     
+    # MAYBE MOVE THIS ELSEWHERE
     param_aghf_unc = ['p', 'N', 's_max', 'k'] + ['k_p', 'k_v']
     param_aghf_con = param_aghf_unc[:] + ['k_cons', 'c_cons']
     
@@ -580,7 +613,7 @@ def get_avg_best_param(fphlame, fps_aligator, fps_croco, th_val, sort_col, N,
     filt_croco = get_param_across_scenarios(top_croco, param_croco_unc, sort_col, "u_sq_real")
     filt_alig = get_param_across_scenarios(top_alig, param_alig_con, sort_col, "u_sq_real")
     
-    
+    ipdb.set_trace()
     
     if filt_croco is not None:
         if filt_croco.shape[0] > 0:
@@ -608,7 +641,13 @@ def run_batch_custom_aghf(fp_param, fp_urdf, N, j_type, fp_folder_scenarios, num
     Given a best parameter, a robot and scenarios, it runs each scenario `n_repeats`
     and stores the results for further processing.
     """
-    best_param = pd.read_pickle(fp_param)['aghf']
+
+    if isinstance(fp_param, str):
+        best_param = pd.read_pickle(fp_param)['aghf']
+    elif isinstance(fp_param, dict):
+        best_param = fp_param
+    else:
+        raise("fp_param valid types: str  or dict")
     N_to_fp_urdf = {N: fp_urdf}
     for scenario_name in scenario_names:
         best_param['scenario_name'] = scenario_name
